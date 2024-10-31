@@ -1,9 +1,11 @@
 /*
  Noah MacGillivray
  Assignment:  
- 10/3/2024
+ 10/31/2024
  CSCI 2251 U01
- Purpose: 
+ Purpose: Reads in matrix from file, divides 
+ based on specified dimension in first row and 
+ prints the matrix to consul. 
  
 This code is provided to give you a
 starting place. It should be modified.
@@ -58,13 +60,13 @@ public class Main {
         int[][] A = null;
         int[][] B = null;
 
-        // if (args.length < 1) {
-        //     System.out.println("Please provide the file.");
-        // }
-        // String filePath = args[0];
+        if (args.length < 1) {
+            System.out.println("Please provide the file.");
+        }
+        String filePath = args[0];
 
         // Testing
-        String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
+        //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix2.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
 
@@ -156,13 +158,13 @@ public class Main {
     public static void print2dArray(int[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
-                System.out.printf("%-3d", array[i][j]);
+                System.out.printf("%4d", array[i][j]);
             }
             System.out.println();
         }
     }
 
-    // Adds matrix on single thread for testing comparison
+    // Adds matrices on a single thread for testing comparison
     public static int[][] singleThreadAddArrays(int[][] A, int[][] B, int rows, int cols) {
         int[][] temp = new int[rows][cols];
         for (int i = 0; i < A.length; i++) {
