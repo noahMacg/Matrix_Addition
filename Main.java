@@ -22,6 +22,20 @@ threads compared to processes, etcetera,
 and connect these issues to 
 multi-threading.
 
+Multithreading reduces system resource usage
+in several ways including improved CPU utilization,
+reducing context switching and sharing memory space.
+If a system has a multicore processor it can run many
+different threads at the same time (something humans are
+unable to do efficiently; our biological neural network's
+working memory is overwhelmed with quickly).Aside from 
+the multithreading, the CPU can be better used by allowing
+I/O operations to complete in the background while the
+system is doing other things. Memory efficiency is improved
+because threads share memory space which decreases compared 
+to using multiple processes to complete the same task.Improved 
+response time by not blocking operations, reducing idle times
+and better responsiveness when interacting with the system. 
 */
 
 import java.io.File;
@@ -36,17 +50,21 @@ public class Main {
         int rows = 0;
         // Matrix columns being read in
         int columns = 0;
-        int quadrant = 0;
+        int quadrantOne = 1;
+        int quadrantTwo = 2;
+        int quadrantThree = 3;
+        int quadrantFour = 4;
+
         int[][] A = null;
         int[][] B = null;
 
-        if (args.length < 1) {
-            System.out.println("Please provide the file.");
-        }
-        String filePath = args[0];
+        // if (args.length < 1) {
+        //     System.out.println("Please provide the file.");
+        // }
+        // String filePath = args[0];
 
         // Testing
-        //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
+        String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix2.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
 
@@ -56,10 +74,10 @@ public class Main {
 
         // Source module30_concurrency\035_example_with_join
         // Instantiates ThreadOperation objects
-        ThreadOperation T1 = new ThreadOperation(A, B, quadrant);
-        ThreadOperation T2 = new ThreadOperation(A, B, quadrant);
-        ThreadOperation T3 = new ThreadOperation(A, B, quadrant);
-        ThreadOperation T4 = new ThreadOperation(A, B, quadrant);
+        ThreadOperation T1 = new ThreadOperation(A, B, quadrantOne);
+        ThreadOperation T2 = new ThreadOperation(A, B, quadrantTwo);
+        ThreadOperation T3 = new ThreadOperation(A, B, quadrantThree);
+        ThreadOperation T4 = new ThreadOperation(A, B, quadrantFour);
 
         // Source module30_concurrency\035_example_with_join
         //Start the threads
@@ -103,7 +121,8 @@ public class Main {
         System.out.println();
         System.out.println("Matrix B from file");
         print2dArray(B);
-        System.out.println();
+        System.out.println("\nSingle thread testing\nreference for matrix A+B");
+        print2dArray(singleThreadAddArrays(A, B, rows, columns));
 
     } // End Main
 
@@ -133,6 +152,7 @@ public class Main {
         return matrix;
     }
 
+    // Prints matrix
     public static void print2dArray(int[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
@@ -140,5 +160,16 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    // Adds matrix on single thread for testing comparison
+    public static int[][] singleThreadAddArrays(int[][] A, int[][] B, int rows, int cols) {
+        int[][] temp = new int[rows][cols];
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[i].length; j++) {
+                temp[i][j] = A[i][j] + B[i][j];
+            }
+        }
+        return temp;
     }
 } // End class
