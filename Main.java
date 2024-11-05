@@ -76,28 +76,9 @@ public class Main {
 
         // Source module30_concurrency\035_example_with_join
         // Instantiates ThreadOperation objects
-        ThreadOperation T1 = new ThreadOperation(A, B, quadrantOne);
-        ThreadOperation T2 = new ThreadOperation(A, B, quadrantTwo);
-        ThreadOperation T3 = new ThreadOperation(A, B, quadrantThree);
-        ThreadOperation T4 = new ThreadOperation(A, B, quadrantFour);
-
-        // Source module30_concurrency\035_example_with_join
-        //Start the threads
-        T1.start();
-        T2.start();
-        T3.start();
-        T4.start();
 
         // Source module30_concurrency\035_example_with_join
         //Wait on threads to finish.
-        try {
-            T1.join();
-            T2.join();
-            T3.join();
-            T4.join();
-        } catch (InterruptedException e) {
-            System.out.println("Interrupted");
-        }
 
         try {
             Scanner fileReader = new Scanner(new File(filePath));
@@ -115,6 +96,30 @@ public class Main {
             e.printStackTrace();
             System.out.println(e);
             System.exit(1);
+        }
+
+        // Matrix to hold the added numbers
+        int[][] C = new int[rows][columns];
+
+        ThreadOperation T1 = new ThreadOperation(A, B, C, quadrantOne);
+        ThreadOperation T2 = new ThreadOperation(A, B, C, quadrantTwo);
+        ThreadOperation T3 = new ThreadOperation(A, B, C, quadrantThree);
+        ThreadOperation T4 = new ThreadOperation(A, B, C, quadrantFour);
+
+        // Source module30_concurrency\035_example_with_join
+        //Start the threads
+        T1.start();
+        T2.start();
+        T3.start();
+        T4.start();
+
+        try {
+            T1.join();
+            T2.join();
+            T3.join();
+            T4.join();
+        } catch (InterruptedException e) {
+            System.out.println("Interrupted");
         }
 
         System.out.println();
