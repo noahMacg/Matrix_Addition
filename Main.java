@@ -52,14 +52,18 @@ public class Main {
         int rows = 0;
         // Matrix columns being read in
         int columns = 0;
+        // Quadrants for dividing the matrix addition 
         int quadrantOne = 1;
         int quadrantTwo = 2;
         int quadrantThree = 3;
         int quadrantFour = 4;
 
+        // First matrix being read in from file
         int[][] A = null;
+        // Second matrix being read in from file
         int[][] B = null;
 
+        // Read in file from command prompt
         if (args.length < 1) {
             System.out.println("Please provide the file.");
         }
@@ -69,16 +73,9 @@ public class Main {
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix2.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
-
-        int[][] test = fillMatrixRandom(5, 5, 10);
-        System.out.println("\nTest matrix");
-        print2dArray(test);
-
-        // Source module30_concurrency\035_example_with_join
-        // Instantiates ThreadOperation objects
-
-        // Source module30_concurrency\035_example_with_join
-        //Wait on threads to finish.
+        // int[][] test = fillMatrixRandom(5, 5, 10);
+        // System.out.println("\nTest matrix");
+        // print2dArray(test);
 
         try {
             Scanner fileReader = new Scanner(new File(filePath));
@@ -90,7 +87,6 @@ public class Main {
             }
             A = matrixFromFile(rows, columns, fileReader);
             B = matrixFromFile(rows, columns, fileReader);
-
             fileReader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,18 +97,22 @@ public class Main {
         // Matrix to hold the added numbers
         int[][] C = new int[rows][columns];
 
+        // Source module30_concurrency\035_example_with_join
+        // Instantiates ThreadOperation objects
         ThreadOperation T1 = new ThreadOperation(A, B, C, quadrantOne);
         ThreadOperation T2 = new ThreadOperation(A, B, C, quadrantTwo);
         ThreadOperation T3 = new ThreadOperation(A, B, C, quadrantThree);
         ThreadOperation T4 = new ThreadOperation(A, B, C, quadrantFour);
 
         // Source module30_concurrency\035_example_with_join
-        //Start the threads
+        //Starts the threads
         T1.start();
         T2.start();
         T3.start();
         T4.start();
 
+        // Source module30_concurrency\035_example_with_join
+        //Wait on threads to finish.
         try {
             T1.join();
             T2.join();
