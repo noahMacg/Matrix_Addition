@@ -35,7 +35,7 @@ public class ThreadOperation extends Thread {
         updateQuadrantIndexes(rowLength, columnLength, quadrant);
 
         for (int i = startRow; i < stopRow; i++) {
-            for (int j = startCol; i < stopCol; j++) {
+            for (int j = startCol; j < stopCol; j++) {
                 C[i][j] = A[i][j] + B[i][j];
             }
         }
@@ -51,7 +51,7 @@ public class ThreadOperation extends Thread {
 
         if (quadrant == 1) {
             startRow = 0;
-            stopRow = rowLength / 2;
+            stopRow = (rowLength / 2);
             startCol = 0;
             stopCol = columnLength / 2;
 
@@ -64,9 +64,9 @@ public class ThreadOperation extends Thread {
             startRow = (rowLength / 2);
             stopRow = rowLength;
             startCol = 0;
-            stopCol = columnLength / 2;
+            stopCol = (columnLength / 2);
         } else {
-            startRow = rowLength / 2;
+            startRow = (rowLength / 2);
             stopRow = rowLength;
             startCol = (columnLength / 2);
             stopCol = columnLength;
