@@ -1,11 +1,14 @@
 /*
  Noah MacGillivray
  Assignment:  
- 10/31/2024
+ 11/6/2024
  CSCI 2251 U01
- Purpose: Reads in matrix from file, divides 
- based on specified dimension in first row and 
- prints the matrix to consul. 
+ Purpose: Reads in matrix from file from command line, 
+ divides the matrix based on specified dimensions in the
+first row into two matrices, uses 4 threads to complete
+a quadrant of the matrix at at time stored in a third array,
+and prints the matrix to consul. There are also various other testing 
+methods. 
  
 This code is provided to give you a
 starting place. It should be modified.
@@ -70,9 +73,9 @@ public class Main {
         // String filePath = args[0];
 
         // Testing
-        String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
+        //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix2.txt";
-        //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
+        String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
         // int[][] test = fillMatrixRandom(5, 5, 10);
         // System.out.println("\nTest matrix");
         // print2dArray(test);
@@ -80,7 +83,7 @@ public class Main {
         try {
             Scanner fileReader = new Scanner(new File(filePath));
 
-            // Read in first row indicating rows / columns
+            // Read in first row indicating the rows / columns
             if (fileReader.hasNextLine()) {
                 rows = fileReader.nextInt();
                 columns = fileReader.nextInt();
@@ -98,7 +101,8 @@ public class Main {
         int[][] C = new int[rows][columns];
 
         // Source module30_concurrency\035_example_with_join
-        // Instantiates ThreadOperation objects
+        // Instantiates ThreadOperation objects and pass the information
+        // needed to perform their quadrant of the addition. 
         ThreadOperation T1 = new ThreadOperation(A, B, C, quadrantOne);
         ThreadOperation T2 = new ThreadOperation(A, B, C, quadrantTwo);
         ThreadOperation T3 = new ThreadOperation(A, B, C, quadrantThree);
@@ -122,16 +126,24 @@ public class Main {
             System.out.println("Interrupted");
         }
 
+        // Prints matrix A
         System.out.println();
         System.out.println("Matrix A from file");
         print2dArray(A);
+
+        // Prints matrix B
         System.out.println();
         System.out.println("Matrix B from file");
         print2dArray(B);
+
+        // Prints matrix A+B for reference 
         System.out.println("\nSingle thread testing\nreference for matrix A+B");
         print2dArray(singleThreadAddArrays(A, B, rows, columns));
+
+        // Prints matrix C which is A+B multi thread
         System.out.println("\nMulti thread matrix A+B");
         print2dArray(C);
+        System.out.println();
 
     } // End Main
 
