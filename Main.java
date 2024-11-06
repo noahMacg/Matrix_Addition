@@ -66,16 +66,16 @@ public class Main {
         // Second matrix being read in from file
         int[][] B = null;
 
-        // Read in file from command prompt
-        // if (args.length < 1) {
-        //     System.out.println("Please provide the file.");
-        // }
-        // String filePath = args[0];
+        //Read in file from command prompt
+        if (args.length < 1) {
+            System.out.println("Please provide the file.");
+        }
+        String filePath = args[0];
 
         // Testing
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix1.txt";
         //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix2.txt";
-        String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
+        //String filePath = "C:\\Users\\pilga\\code\\CS2251_code\\Matrix_Addition\\matrix3.txt";
         // int[][] test = fillMatrixRandom(5, 5, 10);
         // System.out.println("\nTest matrix");
         // print2dArray(test);
