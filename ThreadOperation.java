@@ -13,14 +13,14 @@ public class ThreadOperation extends Thread {
     private int[][] C;
     private int quadrant;
 
-    int rowLength; // Total row length
-    int columnLength; // Total column length 
+    private int rowLength; // Total row length
+    private int columnLength; // Total column length 
 
     // Values of where to start / stop based on this quadrant
-    int startRow;
-    int stopRow;
-    int startCol;
-    int stopCol;
+    private int startRow;
+    private int stopRow;
+    private int startCol;
+    private int stopCol;
 
     // Constructor 
     public ThreadOperation(int[][] A, int[][] B, int[][] C, int quadrant) {
